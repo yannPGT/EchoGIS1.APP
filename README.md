@@ -20,13 +20,39 @@ Cette application vise à :
 
 ```bash
 📦 EchoGIS1.APP/
- ┣ 📂 data/               # Fichiers JSON (Q/R extraites, configuration)
- ┣ 📂 assets/             # Icônes, images, logos
- ┣ 📂 components/         # Composants HTML/JS
- ┣ 📂 styles/             # Fichiers CSS ou Tailwind
- ┣ 📜 index.html          # Point d’entrée
- ┣ 📜 main.js             # Script principal
- ┣ 📜 extract.js          # Extraction Q/R depuis PV
- ┣ 📜 README.md           # Ce fichier
- ┣ 📜 .gitignore
- ┗ 📜 LICENSE
+ ┣ 📂 src/                # Code source React/TypeScript
+ ┃ ┣ 📂 components/       # Composants de l’interface
+ ┃ ┣ 📂 utils/            # Fonctions utilitaires
+ ┃ ┣ 📂 types/            # Définitions de types
+ ┃ ┣ 📜 App.tsx
+ ┃ ┗ 📜 main.tsx
+ ┣ 📂 docs/               # Version compilée pour publication
+ ┣ 📜 index.html          # Point d’entrée Vite
+ ┣ 📜 package.json        # Dépendances et scripts
+ ┣ 📜 README.md           # Documentation
+ ┗ 📜 LICENSE.txt
+```
+
+## 🚀 Installation rapide
+
+```bash
+npm install
+npm run dev   # lancement en développement
+npm run build # génération de la version de production
+```
+
+La version générée se trouve dans `dist/` et peut être copiée dans `docs/` pour une mise en ligne via GitHub Pages.
+
+## 🔐 Mode administrateur
+
+Le mode administrateur (code par défaut `pompiers`) permet :
+- d’ajouter, modifier ou supprimer des questions/réponses ;
+- de gérer les paramètres de l’application (dates de réunions, etc.) ;
+- d’importer ou exporter les données au format JSON, DOCX ou PDF.
+
+### Aperçu
+
+![Connexion admin](docs/screenshots/admin-login.svg)
+
+![Liste des FAQs](docs/screenshots/faq-list.svg)
+
