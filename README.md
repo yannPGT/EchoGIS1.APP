@@ -36,4 +36,10 @@ Cette application vise à :
  ┣ 📜 README.md           # Cette documentation
  ┗ 📜 LICENSE.txt         # Licence open source
 
+## Importer un fichier JSON
 
+Vous pouvez importer une liste de questions/réponses au format JSON via
+l'onglet **Import/Export** de l'interface administrateur. Le fichier doit
+contenir un tableau d'objets avec les propriétés `question`, `réponse` et
+`compagnie` (voir `docs/import.json`). Les entrées importées sont ajoutées
+aux FAQ existantes et une sauvegarde automatique est créée.
