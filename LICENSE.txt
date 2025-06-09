@@ -1,0 +1,24 @@
+# LICENCE INTERNE BSPP
+
+Ce logiciel, intitulé **EchoGIS1.APP**, est un outil développé au sein du **1er groupement d'incendie et de secours de la BSPP**, à usage strictement interne.
+
+## 1. Droits d’utilisation
+L’utilisation de ce logiciel est autorisée exclusivement :
+- aux personnels du groupement concernés par les missions de coordination et de concertation ;
+- dans le cadre des activités opérationnelles, administratives et de gouvernance locale.
+
+Toute reproduction, diffusion, modification ou réutilisation en dehors du cadre institutionnel de la BSPP est formellement interdite sans autorisation écrite préalable du chef de corps du 1er GIS.
+
+## 2. Responsabilités
+Le logiciel est fourni **"tel quel"**, sans garantie explicite ou implicite.  
+Les utilisateurs sont responsables de vérifier l’adéquation de l’outil avec leurs besoins opérationnels.  
+Aucune responsabilité ne saurait être engagée en cas de dysfonctionnement ou d’erreur de traitement.
+
+## 3. Sécurité et confidentialité
+Les données traitées ou générées par l’application peuvent contenir des informations sensibles ou classifiées.  
+L’utilisateur s’engage à respecter les dispositions réglementaires en vigueur (notamment IGI 1300, SI BSPP, RGPD interne) et à veiller à la non-divulgation des données extraites.
+
+---
+
+© 2025 – 1er GIS / Brigade des Sapeurs-Pompiers de Paris.  
+Toute infraction aux présentes dispositions pourra faire l’objet de mesures disciplinaires ou juridiques.
