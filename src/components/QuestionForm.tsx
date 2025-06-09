@@ -41,7 +41,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ companies, contactEmail }) 
     return (
       <div className="bg-white rounded-lg shadow-sm p-8">
         <div className="text-center">
-          <CheckCircle className="h-16 w-16 text-green-600 mx-auto mb-4" />
+          <CheckCircle className="h-16 w-16 text-green-600 mx-auto mb-4" aria-hidden="true" />
           <h3 className="text-xl font-semibold text-gray-900 mb-2">Question envoyée !</h3>
           <p className="text-gray-600">
             Votre question a été transmise à l'équipe administrative.
@@ -76,7 +76,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ companies, contactEmail }) 
   return (
     <div className="bg-white rounded-lg shadow-sm p-6">
       <div className="flex items-center space-x-3 mb-6">
-        <Mail className="h-6 w-6 text-red-600" />
+        <Mail className="h-6 w-6 text-red-600" aria-hidden="true" />
         <h2 className="text-xl font-semibold text-gray-900">Poser une question</h2>
       </div>
 
@@ -123,7 +123,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ companies, contactEmail }) 
           type="submit"
           className="w-full bg-red-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-red-700 transition-colors flex items-center justify-center space-x-2"
         >
-          <Send className="h-5 w-5" />
+          <Send className="h-5 w-5" aria-hidden="true" />
           <span>Envoyer la question</span>
         </button>
       </form>

@@ -182,7 +182,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, onDataChange }) => {
       {/* Admin Header */}
       <div className="border-b border-gray-200 p-6">
         <div className="flex items-center space-x-3">
-          <Settings className="h-6 w-6 text-red-600" />
+          <Settings className="h-6 w-6 text-red-600" aria-hidden="true" />
           <h2 className="text-xl font-semibold text-gray-900">Administration</h2>
         </div>
       </div>
@@ -204,7 +204,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, onDataChange }) => {
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
             >
-              <tab.icon className="h-4 w-4" />
+              <tab.icon className="h-4 w-4" aria-hidden="true" />
               <span>{tab.label}</span>
             </button>
           ))}
@@ -262,7 +262,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, onDataChange }) => {
                 onClick={handleAddFaq}
                 className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors flex items-center space-x-2"
               >
-                <Plus className="h-4 w-4" />
+                <Plus className="h-4 w-4" aria-hidden="true" />
                 <span>Ajouter la FAQ</span>
               </button>
             </div>
@@ -337,13 +337,13 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, onDataChange }) => {
                               onClick={() => handleEditFaq(faq)}
                               className="text-blue-600 hover:text-blue-800"
                             >
-                              <Edit3 className="h-4 w-4" />
+                              <Edit3 className="h-4 w-4" aria-hidden="true" />
                             </button>
                             <button
                               onClick={() => handleDeleteFaq(faq.id)}
                               className="text-red-600 hover:text-red-800"
                             >
-                              <Trash2 className="h-4 w-4" />
+                              <Trash2 className="h-4 w-4" aria-hidden="true" />
                             </button>
                           </div>
                         </div>
@@ -370,7 +370,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, onDataChange }) => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <Mail className="h-4 w-4 inline mr-1" />
+                    <Mail className="h-4 w-4 inline mr-1" aria-hidden="true" />
                     Email de contact
                   </label>
                   <input
@@ -396,14 +396,14 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, onDataChange }) => {
             <div className="border border-gray-200 rounded-lg p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-medium text-gray-900">
-                  <Calendar className="h-5 w-5 inline mr-2" />
+                  <Calendar className="h-5 w-5 inline mr-2" aria-hidden="true" />
                   Dates des réunions
                 </h3>
                 <button
                   onClick={addMeetingDate}
                   className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700 transition-colors flex items-center space-x-1"
                 >
-                  <Plus className="h-4 w-4" />
+                  <Plus className="h-4 w-4" aria-hidden="true" />
                   <span>Ajouter</span>
                 </button>
               </div>
@@ -437,7 +437,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, onDataChange }) => {
                       onClick={() => removeMeetingDate(index)}
                       className="text-red-600 hover:text-red-800"
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <Trash2 className="h-4 w-4" aria-hidden="true" />
                     </button>
                   </div>
                 ))}
@@ -448,7 +448,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, onDataChange }) => {
               onClick={handleSaveSettings}
               className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center space-x-2"
             >
-              <Save className="h-4 w-4" />
+              <Save className="h-4 w-4" aria-hidden="true" />
               <span>Sauvegarder les paramètres</span>
             </button>
           </div>
@@ -465,7 +465,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, onDataChange }) => {
               </p>
               <div className="flex items-center space-x-4">
                 <label className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors cursor-pointer flex items-center space-x-2">
-                  <Upload className="h-4 w-4" />
+                  <Upload className="h-4 w-4" aria-hidden="true" />
                   <span>{isImporting ? 'Importation...' : 'Choisir un fichier'}</span>
                   <input
                     type="file"
@@ -492,7 +492,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, onDataChange }) => {
                 onClick={exportData}
                 className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center space-x-2"
               >
-                <Download className="h-4 w-4" />
+                <Download className="h-4 w-4" aria-hidden="true" />
                 <span>Télécharger la sauvegarde</span>
               </button>
             </div>

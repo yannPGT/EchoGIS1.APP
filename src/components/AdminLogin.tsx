@@ -24,7 +24,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onCancel }) => {
       <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full mx-4">
         <div className="text-center mb-6">
           <div className="bg-red-600 p-3 rounded-full w-16 h-16 mx-auto mb-4">
-            <Shield className="h-10 w-10 text-white" />
+            <Shield className="h-10 w-10 text-white" aria-hidden="true" />
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Mode Administrateur</h2>
           <p className="text-gray-600">Veuillez saisir le code d'accès administrateur</p>
@@ -35,8 +35,8 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onCancel }) => {
             <label htmlFor="adminCode" className="block text-sm font-medium text-gray-700 mb-2">
               Code administrateur
             </label>
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" aria-hidden="true" />
               <input
                 type="password"
                 id="adminCode"
