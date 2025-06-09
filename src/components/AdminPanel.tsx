@@ -172,7 +172,13 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, onDataChange }) => {
   const categories = Array.from(new Set(data.faqs.map(faq => faq.category)));
 
   return (
-    <div className="bg-white rounded-lg shadow-sm">
+    <div className="bg-white rounded-lg shadow-sm relative">
+      {isImporting && (
+        <div className="absolute inset-0 bg-white bg-opacity-75 z-20 flex flex-col items-center justify-center">
+          <div className="animate-spin h-8 w-8 border-4 border-red-600 border-t-transparent rounded-full mb-4"></div>
+          <p className="text-gray-700 font-medium">Importation en cours...</p>
+        </div>
+      )}
       {/* Admin Header */}
       <div className="border-b border-gray-200 p-6">
         <div className="flex items-center space-x-3">
