@@ -1,0 +1,32 @@
+[
+  {
+    "date": "2025-05-15",
+    "compagnie": "14e CIS",
+    "question": "Les délais de réponse aux demandes de mutation sont-ils connus ?",
+    "réponse": "Ils dépendent des périodes de gestion fixées par la DRH et varient selon les affectations demandées."
+  },
+  {
+    "date": "2025-05-15",
+    "compagnie": "13e CIS",
+    "question": "Les formations liées aux nouveaux matériels seront-elles centralisées ?",
+    "réponse": "Un calendrier de formation inter-compagnies sera diffusé pour rationaliser les sessions."
+  },
+  {
+    "date": "2025-05-15",
+    "compagnie": "EMGIS",
+    "question": "Une cellule RH pourra-t-elle être mise en place au niveau des CPC ?",
+    "réponse": "Une étude est en cours par le bureau RH. Des relais RH locaux pourraient être envisagés."
+  },
+  {
+    "date": "2025-05-15",
+    "compagnie": "EMGIS",
+    "question": "Peut-on envisager un retour de la messagerie instantanée RESANA sur mobile ?",
+    "réponse": "La DSI examine les possibilités techniques et de sécurité avant tout déploiement élargi."
+  },
+  {
+    "date": "2025-05-15",
+    "compagnie": "12e CIS",
+    "question": "Des retards dans les renouvellements de dotation EPI ont été constatés. Quelles solutions ?",
+    "réponse": "Le SCLOG a lancé une opération de rattrapage avec priorité donnée aux unités les plus impactées."
+  }
+]
