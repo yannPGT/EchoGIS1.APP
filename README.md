@@ -13,6 +13,7 @@ Cette application vise à :
 - Extraire automatiquement les Q/R depuis des PV Word ou PDF
 - Afficher dynamiquement les dates à venir des réunions de CPUE
 - Être utilisée localement sans base de données ni droits administrateur
+- Proposer un thème sombre activable depuis l'en-tête
 
 ---
 

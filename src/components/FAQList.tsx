@@ -11,7 +11,7 @@ const FAQList: React.FC<FAQListProps> = ({ faqs }) => {
     return (
       <div className="text-center py-12">
         <MessageCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-        <p className="text-gray-600">Aucune question trouvée avec ces critères.</p>
+        <p className="text-gray-600 dark:text-gray-300">Aucune question trouvée avec ces critères.</p>
       </div>
     );
   }
@@ -19,13 +19,13 @@ const FAQList: React.FC<FAQListProps> = ({ faqs }) => {
   return (
     <div className="space-y-6">
       {faqs.map((faq) => (
-        <div key={faq.id} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+        <div key={faq.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
           <div className="p-6">
             <div className="flex items-start justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900 flex-1 pr-4">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 flex-1 pr-4">
                 {faq.question}
               </h3>
-              <div className="flex items-center space-x-2 text-sm text-gray-500">
+              <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
                 <Tag className="h-4 w-4" />
                 <span className="bg-red-100 text-red-800 px-2 py-1 rounded-full">
                   {faq.category}
@@ -33,7 +33,7 @@ const FAQList: React.FC<FAQListProps> = ({ faqs }) => {
               </div>
             </div>
             
-            <div className="prose prose-sm max-w-none text-gray-700 mb-4">
+            <div className="prose prose-sm max-w-none text-gray-700 dark:text-gray-300 mb-4">
               {faq.answer.split('\n').map((paragraph, index) => (
                 <p key={index} className="mb-2 last:mb-0">
                   {paragraph}
@@ -41,7 +41,7 @@ const FAQList: React.FC<FAQListProps> = ({ faqs }) => {
               ))}
             </div>
 
-            <div className="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-gray-100">
+            <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 pt-4 border-t border-gray-100 dark:border-gray-700">
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-1">
                   <Calendar className="h-3 w-3" />
@@ -59,7 +59,7 @@ const FAQList: React.FC<FAQListProps> = ({ faqs }) => {
                   {faq.keywords.map((keyword, index) => (
                     <span
                       key={index}
-                      className="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs"
+                      className="bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-200 px-2 py-0.5 rounded text-xs"
                     >
                       {keyword}
                     </span>

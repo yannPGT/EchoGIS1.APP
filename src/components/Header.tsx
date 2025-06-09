@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Calendar, Shield } from 'lucide-react';
 import { MeetingDate } from '../types';
 
@@ -9,13 +9,28 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ meetingDates, isAdmin, onToggleAdmin }) => {
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  };
   const upcomingMeetings = meetingDates
     .filter(meeting => new Date(meeting.date) >= new Date())
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
     .slice(0, 3);
 
   return (
-    <header className="bg-white shadow-sm">
+    <header className="bg-white dark:bg-gray-800 shadow-sm">
       {/* Meeting Dates Banner */}
       {upcomingMeetings.length > 0 && (
         <div className="bg-red-600 text-white py-2">
@@ -42,21 +57,29 @@ const Header: React.FC<HeaderProps> = ({ meetingDates, isAdmin, onToggleAdmin })
               <Shield className="h-8 w-8 text-white" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">EchoGIS1</h1>
-              <p className="text-gray-600">Foire aux questions - Personnel GIS 1</p>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">EchoGIS1</h1>
+              <p className="text-gray-600 dark:text-gray-300">Foire aux questions - Personnel GIS 1</p>
             </div>
           </div>
-          
-          <button
-            onClick={onToggleAdmin}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-              isAdmin
-                ? 'bg-red-600 text-white hover:bg-red-700'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-            }`}
-          >
-            {isAdmin ? 'Mode Admin' : 'Mode Utilisateur'}
-          </button>
+
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={toggleTheme}
+              className="px-4 py-2 rounded-lg font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+            >
+              {theme === 'dark' ? 'Clair' : 'Sombre'}
+            </button>
+            <button
+              onClick={onToggleAdmin}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                isAdmin
+                  ? 'bg-red-600 text-white hover:bg-red-700'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600'
+              }`}
+            >
+              {isAdmin ? 'Mode Admin' : 'Mode Utilisateur'}
+            </button>
+          </div>
         </div>
       </div>
     </header>

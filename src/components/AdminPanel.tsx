@@ -172,17 +172,17 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, onDataChange }) => {
   const categories = Array.from(new Set(data.faqs.map(faq => faq.category)));
 
   return (
-    <div className="bg-white rounded-lg shadow-sm">
+    <div className="bg-white dark:bg-gray-800 dark:text-gray-100 rounded-lg shadow-sm">
       {/* Admin Header */}
-      <div className="border-b border-gray-200 p-6">
+      <div className="border-b border-gray-200 dark:border-gray-700 p-6">
         <div className="flex items-center space-x-3">
           <Settings className="h-6 w-6 text-red-600" />
-          <h2 className="text-xl font-semibold text-gray-900">Administration</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Administration</h2>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-gray-200">
+      <div className="border-b border-gray-200 dark:border-gray-700">
         <nav className="flex space-x-8 px-6">
           {[
             { id: 'faqs', label: 'Gestion FAQ', icon: Plus },

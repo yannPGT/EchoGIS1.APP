@@ -17,7 +17,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   categories
 }) => {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm mb-6">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm mb-6">
       <div className="flex flex-col lg:flex-row gap-4">
         {/* Search Input */}
         <div className="flex-1 relative">
@@ -27,7 +27,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             placeholder="Rechercher une question..."
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100"
           />
         </div>
 
@@ -36,7 +36,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           <select
             value={selectedCategory}
             onChange={(e) => onCategoryChange(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100"
           >
             <option value="">Toutes les catégories</option>
             {categories.map(category => (
