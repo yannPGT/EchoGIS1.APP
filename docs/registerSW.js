@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/EchoGIS1.APP/sw.js', { scope: '/EchoGIS1.APP/' })})}

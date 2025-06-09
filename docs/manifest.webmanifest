@@ -1,16 +1,1 @@
-{
-  "name": "EchoGIS1",
-  "short_name": "EchoGIS1",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
-  "description": "Foire aux questions pour le personnel du GIS 1.",
-  "icons": [
-    {
-      "src": "/vite.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
-    }
-  ]
-}
+{"name":"echogis1-app","short_name":"echogis1-app","start_url":"/EchoGIS1.APP/","display":"standalone","background_color":"#ffffff","lang":"en","scope":"/EchoGIS1.APP/"}
