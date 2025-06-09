@@ -46,6 +46,20 @@ const SearchBar: React.FC<SearchBarProps> = ({
             ))}
           </select>
         </div>
+
+        {/* Reset Button */}
+        <div className="flex items-center">
+          <button
+            type="button"
+            onClick={() => {
+              onSearchChange('');
+              onCategoryChange('');
+            }}
+            className="bg-gray-200 text-gray-700 px-4 py-3 rounded-lg hover:bg-gray-300 transition-colors"
+          >
+            Réinitialiser
+          </button>
+        </div>
       </div>
     </div>
   );
