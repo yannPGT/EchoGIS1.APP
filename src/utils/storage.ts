@@ -109,12 +109,31 @@ export const importData = (file: File): Promise<AppData> => {
     const reader = new FileReader();
     reader.onload = (e) => {
       try {
-        const imported = JSON.parse(e.target?.result as string) as AppData;
+        const parsed = JSON.parse(e.target?.result as string);
         const current = loadData();
+
+        let importedFaqs: FAQ[] = [];
+        let importedData: Partial<AppData> = {};
+
+        if (Array.isArray(parsed)) {
+          importedFaqs = parsed.map((item, idx) => ({
+            id: `import-${Date.now()}-${idx}`,
+            question: item.question ?? item.Question ?? '',
+            answer: item.answer ?? item.réponse ?? item.Réponse ?? '',
+            category: item.compagnie ?? item.category ?? 'Importé',
+            keywords: [],
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+          }));
+        } else {
+          importedData = parsed as AppData;
+          importedFaqs = (importedData.faqs ?? []) as FAQ[];
+        }
+
         const merged: AppData = {
           ...current,
-          ...imported,
-          faqs: [...current.faqs, ...(imported.faqs || [])]
+          ...importedData,
+          faqs: [...current.faqs, ...importedFaqs]
         };
         saveData(merged);
         resolve(merged);

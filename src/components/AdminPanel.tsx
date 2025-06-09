@@ -102,9 +102,9 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, onDataChange }) => {
         text = await extractTextFromPdf(file);
       } else if (file.name.endsWith('.json')) {
         const merged = await importData(file);
+        onDataChange(merged);
         const backupName = exportData(merged);
         alert(`Sauvegarde créée: ${backupName}`);
-        window.location.reload();
         return;
       } else {
         alert('Format de fichier non supporté. Utilisez .docx, .pdf ou .json');
