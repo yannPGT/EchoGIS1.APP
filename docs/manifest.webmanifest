@@ -1,0 +1,16 @@
+{
+  "name": "EchoGIS1",
+  "short_name": "EchoGIS1",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "description": "Foire aux questions pour le personnel du GIS 1.",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
