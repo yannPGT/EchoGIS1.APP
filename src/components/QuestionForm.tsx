@@ -13,6 +13,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ companies, contactEmail }) 
     question: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [lastMessage, setLastMessage] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,6 +29,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ companies, contactEmail }) 
     
     const mailtoLink = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
+    setLastMessage(body);
     
     setIsSubmitted(true);
     setFormData({ company: '', question: '' });
@@ -42,9 +44,30 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ companies, contactEmail }) 
           <CheckCircle className="h-16 w-16 text-green-600 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-gray-900 mb-2">Question envoyée !</h3>
           <p className="text-gray-600">
-            Votre question a été transmise à l'équipe administrative. 
+            Votre question a été transmise à l'équipe administrative.
             Vous recevrez une réponse dans les plus brefs délais.
           </p>
+          <p className="text-gray-600 mt-4">
+            Si votre client mail ne s'ouvre pas, copiez l'adresse ou le message ci-dessous.
+          </p>
+          <div className="flex justify-center space-x-4 mt-4">
+            <button
+              type="button"
+              onClick={() => navigator.clipboard.writeText(contactEmail)}
+              className="bg-gray-100 px-4 py-2 rounded hover:bg-gray-200 text-gray-700"
+            >
+              Copier l'adresse
+            </button>
+            {lastMessage && (
+              <button
+                type="button"
+                onClick={() => navigator.clipboard.writeText(lastMessage)}
+                className="bg-gray-100 px-4 py-2 rounded hover:bg-gray-200 text-gray-700"
+              >
+                Copier le message
+              </button>
+            )}
+          </div>
         </div>
       </div>
     );
