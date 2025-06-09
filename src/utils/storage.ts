@@ -6,21 +6,21 @@ const defaultData: AppData = {
   faqs: [
     {
       id: '1',
-      question: 'Comment accéder aux plannings de service ?',
+      question: 'Où consulter les plannings de garde ?',
       answer: 'Les plannings de service sont disponibles sur l\'intranet dans la section "Plannings". Vous pouvez les consulter en ligne ou les télécharger au format PDF.',
       category: 'Plannings',
       keywords: ['planning', 'service', 'horaires'],
-      createdAt: '2024-01-15T10:00:00Z',
-      updatedAt: '2024-01-15T10:00:00Z'
+      createdAt: '2025-01-15T10:00:00Z',
+      updatedAt: '2025-01-15T10:00:00Z'
     },
     {
       id: '2',
-      question: 'Procédure pour les demandes de congés ?',
+      question: 'Quelle est la procédure de demande de congés pour 2025 ?',
       answer: 'Les demandes de congés doivent être effectuées via le formulaire dédié sur l\'intranet, au minimum 15 jours avant la date souhaitée. Votre chef d\'unité validera la demande.',
       category: 'RH',
       keywords: ['congés', 'vacances', 'demande'],
-      createdAt: '2024-01-16T14:30:00Z',
-      updatedAt: '2024-01-16T14:30:00Z'
+      createdAt: '2025-01-16T14:30:00Z',
+      updatedAt: '2025-01-16T14:30:00Z'
     }
   ],
   companies: [
@@ -38,23 +38,23 @@ const defaultData: AppData = {
   settings: {
     adminCode: 'pompiers',
     contactEmail: 'admin@gis1.fr',
-    meetingDates: [
-      {
-        type: 'CPUE',
-        unit: '7 CCL',
-        date: '2024-02-15'
-      },
-      {
-        type: 'CPC',
-        unit: '9 CCL',
-        date: '2024-02-20'
-      },
-      {
-        type: 'CPUE',
-        unit: 'EMGIS1',
-        date: '2024-02-25'
-      }
-    ]
+      meetingDates: [
+        {
+          type: 'CPUE',
+          unit: '7 CCL',
+          date: '2025-09-15'
+        },
+        {
+          type: 'CPC',
+          unit: '9 CCL',
+          date: '2025-09-20'
+        },
+        {
+          type: 'CPUE',
+          unit: 'EMGIS1',
+          date: '2025-09-25'
+        }
+      ]
   }
 };
 

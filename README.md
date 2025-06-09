@@ -30,3 +30,14 @@ Cette application vise à :
  ┣ 📜 README.md           # Ce fichier
  ┣ 📜 .gitignore
  ┗ 📜 LICENSE
+
+## 🔄 Réinitialisation et import des données
+
+1. **Réinitialiser** :
+   - Ouvrez les outils développeur de votre navigateur (F12).
+   - Dans la console, exécutez `localStorage.removeItem('echogis1-data');` puis rechargez la page.
+
+2. **Importer des données** :
+   - Dans le panneau administrateur, onglet « Import/Export », cliquez sur *Choisir un fichier*.
+   - Sélectionnez une sauvegarde JSON ou un fichier Word/PDF contenant les questions.
+   - Validez pour mettre à jour la base locale.
