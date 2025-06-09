@@ -10,7 +10,7 @@ const FAQList: React.FC<FAQListProps> = ({ faqs }) => {
   if (faqs.length === 0) {
     return (
       <div className="text-center py-12">
-        <MessageCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+        <MessageCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" aria-hidden="true" />
         <p className="text-gray-600">Aucune question trouvée avec ces critères.</p>
       </div>
     );
@@ -26,7 +26,7 @@ const FAQList: React.FC<FAQListProps> = ({ faqs }) => {
                 {faq.question}
               </h3>
               <div className="flex items-center space-x-2 text-sm text-gray-500">
-                <Tag className="h-4 w-4" />
+                <Tag className="h-4 w-4" aria-hidden="true" />
                 <span className="bg-red-100 text-red-800 px-2 py-1 rounded-full">
                   {faq.category}
                 </span>
@@ -44,7 +44,7 @@ const FAQList: React.FC<FAQListProps> = ({ faqs }) => {
             <div className="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-gray-100">
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-1">
-                  <Calendar className="h-3 w-3" />
+                  <Calendar className="h-3 w-3" aria-hidden="true" />
                   <span>Créé le {new Date(faq.createdAt).toLocaleDateString('fr-FR')}</span>
                 </div>
                 {faq.updatedAt !== faq.createdAt && (

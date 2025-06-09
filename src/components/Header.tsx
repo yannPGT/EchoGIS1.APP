@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ meetingDates, isAdmin, onToggleAdmin })
         <div className="bg-red-600 text-white py-2">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-center space-x-8">
-              <Calendar className="h-5 w-5 flex-shrink-0" />
+              <Calendar className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
               <div className="flex flex-wrap items-center justify-center gap-4 text-sm font-medium">
                 {upcomingMeetings.map((meeting, index) => (
                   <span key={index} className="whitespace-nowrap">
@@ -38,8 +38,8 @@ const Header: React.FC<HeaderProps> = ({ meetingDates, isAdmin, onToggleAdmin })
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <div className="bg-red-600 p-3 rounded-lg">
-              <Shield className="h-8 w-8 text-white" />
+              <div className="bg-red-600 p-3 rounded-lg">
+              <Shield className="h-8 w-8 text-white" aria-hidden="true" />
             </div>
             <div>
               <h1 className="text-3xl font-bold text-gray-900">EchoGIS1</h1>
