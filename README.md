@@ -26,33 +26,14 @@ Cette application vise à :
  ┃ ┣ 📂 types/            # Définitions de types
  ┃ ┣ 📜 App.tsx
  ┃ ┗ 📜 main.tsx
- ┣ 📂 docs/               # Version compilée pour publication
+ ┣ 📂 data/               # Données JSON importées ou générées
+ ┣ 📂 assets/             # Logos, icônes, illustrations
+ ┣ 📂 styles/             # Fichiers CSS/Tailwind
+ ┣ 📂 docs/               # Version compilée pour GitHub Pages
  ┣ 📜 index.html          # Point d’entrée Vite
+ ┣ 📜 extract.js          # Script d’analyse des PV Word/PDF
  ┣ 📜 package.json        # Dépendances et scripts
- ┣ 📜 README.md           # Documentation
- ┗ 📜 LICENSE.txt
-```
+ ┣ 📜 README.md           # Cette documentation
+ ┗ 📜 LICENSE.txt         # Licence open source
 
-## 🚀 Installation rapide
-
-```bash
-npm install
-npm run dev   # lancement en développement
-npm run build # génération de la version de production
-```
-
-La version générée se trouve dans `dist/` et peut être copiée dans `docs/` pour une mise en ligne via GitHub Pages.
-
-## 🔐 Mode administrateur
-
-Le mode administrateur (code par défaut `pompiers`) permet :
-- d’ajouter, modifier ou supprimer des questions/réponses ;
-- de gérer les paramètres de l’application (dates de réunions, etc.) ;
-- d’importer ou exporter les données au format JSON, DOCX ou PDF.
-
-### Aperçu
-
-![Connexion admin](docs/screenshots/admin-login.svg)
-
-![Liste des FAQs](docs/screenshots/faq-list.svg)
 

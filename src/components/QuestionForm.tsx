@@ -37,16 +37,19 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ companies, contactEmail }) 
     setTimeout(() => setIsSubmitted(false), 5000);
   };
 
-  if (isSubmitted) {
-    return (
-      <div className="bg-white rounded-lg shadow-sm p-8">
-        <div className="text-center">
-          <CheckCircle className="h-16 w-16 text-green-600 mx-auto mb-4" aria-hidden="true" />
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">Question envoyée !</h3>
-          <p className="text-gray-600">
-            Votre question a été transmise à l'équipe administrative.
-            Vous recevrez une réponse dans les plus brefs délais.
-          </p>
+ if (isSubmitted) {
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
+      <div className="text-center">
+        <CheckCircle className="h-16 w-16 text-green-600 mx-auto mb-4" aria-hidden="true" />
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+          Question envoyée !
+        </h3>
+        <p className="text-gray-600 dark:text-gray-300">
+          Votre question a été transmise à l'équipe administrative.
+          Vous recevrez une réponse dans les plus brefs délais.
+        </p>
+
           <p className="text-gray-600 mt-4">
             Si votre client mail ne s'ouvre pas, copiez l'adresse ou le message ci-dessous.
           </p>
