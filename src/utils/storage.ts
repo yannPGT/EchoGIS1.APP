@@ -87,27 +87,37 @@ export const saveData = (data: AppData): void => {
   }
 };
 
-export const exportData = (): void => {
-  const data = loadData();
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+export const exportData = (data: AppData = loadData()): string => {
+  const iso = new Date().toISOString().replace(/[:.]/g, '-');
+  const fileName = `SAUVEGARDE_ECHOGIS1-${iso}.json`;
+  const blob = new Blob([JSON.stringify(data, null, 2)], {
+    type: 'application/json'
+  });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `echogis1-backup-${new Date().toISOString().split('T')[0]}.json`;
+  a.download = fileName;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+  return fileName;
 };
 
-export const importData = (file: File): Promise<void> => {
+export const importData = (file: File): Promise<AppData> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       try {
-        const data = JSON.parse(e.target?.result as string);
-        saveData(data);
-        resolve();
+        const imported = JSON.parse(e.target?.result as string) as AppData;
+        const current = loadData();
+        const merged: AppData = {
+          ...current,
+          ...imported,
+          faqs: [...current.faqs, ...(imported.faqs || [])]
+        };
+        saveData(merged);
+        resolve(merged);
       } catch (error) {
         reject(error);
       }

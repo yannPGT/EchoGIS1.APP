@@ -101,7 +101,9 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, onDataChange }) => {
       } else if (file.name.endsWith('.pdf')) {
         text = await extractTextFromPdf(file);
       } else if (file.name.endsWith('.json')) {
-        await importData(file);
+        const merged = await importData(file);
+        const backupName = exportData(merged);
+        alert(`Sauvegarde créée: ${backupName}`);
         window.location.reload();
         return;
       } else {

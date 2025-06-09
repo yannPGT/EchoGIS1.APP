@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { loadData, saveData } from './utils/storage';
+import { loadData, saveData, importData } from './utils/storage';
 import { AppData } from './types';
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
@@ -7,6 +7,7 @@ import FAQList from './components/FAQList';
 import QuestionForm from './components/QuestionForm';
 import AdminPanel from './components/AdminPanel';
 import AdminLogin from './components/AdminLogin';
+import RestoreModal from './components/RestoreModal';
 
 function App() {
   const [data, setData] = useState<AppData>(loadData());
@@ -15,6 +16,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [activeView, setActiveView] = useState<'faq' | 'submit' | 'admin'>('faq');
+  const [showRestoreModal, setShowRestoreModal] = useState(true);
 
   // Save data whenever it changes
   useEffect(() => {
@@ -63,6 +65,12 @@ function App() {
 
   const handleDataChange = (newData: AppData) => {
     setData(newData);
+  };
+
+  const handleRestoreFile = async (file: File) => {
+    const newData = await importData(file);
+    setData(newData);
+    setShowRestoreModal(false);
   };
 
   return (
@@ -136,6 +144,13 @@ function App() {
         <AdminLogin
           onLogin={handleAdminLogin}
           onCancel={() => setShowAdminLogin(false)}
+        />
+      )}
+
+      {showRestoreModal && (
+        <RestoreModal
+          onFileSelect={handleRestoreFile}
+          onCancel={() => setShowRestoreModal(false)}
         />
       )}
     </div>
