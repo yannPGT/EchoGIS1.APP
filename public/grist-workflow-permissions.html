@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Workflow permissions à l'étranger - Grist</title>
+  <style>
+    :root {
+      --brand: #bd7b1d;
+      --brand-dark: #8f5d15;
+      --ink: #0c0a3e;
+      --muted: #67708a;
+      --line: #d9e2f2;
+      --panel: #ffffff;
+      --soft: #eaf7f8;
+      --active: #2f61d8;
+      --done: #00a98f;
+      --todo: #cfc5c7;
+      --warning: #f59e0b;
+      --danger: #dc2626;
+      font-family: Inter, Marianne, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #f6f8fc;
+      font-size: 14px;
+    }
+
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 20px;
+      background: var(--brand);
+      color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .18);
+    }
+
+    .title-block { display: flex; align-items: center; gap: 14px; }
+    .plane { font-size: 42px; line-height: 1; transform: rotate(-12deg); }
+    .kicker { margin: 0; font-size: 12px; opacity: .95; font-weight: 700; }
+    h1 { margin: 2px 0 0; font-size: clamp(20px, 3vw, 28px); line-height: 1.05; }
+    .subtitle { margin: 3px 0 0; font-size: 12px; opacity: .9; }
+
+    .header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    button, select, input, textarea {
+      font: inherit;
+    }
+
+    .pill-btn, .icon-btn {
+      border: 0;
+      border-radius: 999px;
+      background: white;
+      color: var(--ink);
+      padding: 8px 13px;
+      cursor: pointer;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, .2);
+      font-weight: 700;
+    }
+
+    .pill-btn.primary { background: #17324d; color: white; }
+    .pill-btn.warning { color: #92400e; border: 1px solid #fed7aa; box-shadow: none; }
+    .icon-btn { width: 36px; height: 36px; padding: 0; }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 16px;
+      background: var(--soft);
+      overflow-x: auto;
+    }
+
+    .tab {
+      border: 0;
+      border-radius: 999px;
+      padding: 8px 14px;
+      background: white;
+      color: #17324d;
+      cursor: pointer;
+      box-shadow: 0 1px 4px rgba(23, 50, 77, .2);
+      white-space: nowrap;
+    }
+
+    .tab.active { background: #17324d; color: white; font-weight: 800; }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(160px, 1fr) 160px 160px auto;
+      gap: 10px;
+      align-items: center;
+      padding: 16px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .field {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .content { padding: 16px; }
+    .hint {
+      margin: 0 0 14px;
+      padding: 12px 14px;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      background: #eff6ff;
+      color: #1e3a8a;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 4px 14px rgba(23, 50, 77, .07);
+    }
+
+    .stat-value { font-size: 28px; font-weight: 900; color: var(--active); }
+    .stat-label { color: var(--muted); margin-top: 3px; }
+
+    .request-card {
+      background: var(--panel);
+      border: 1px solid #bfd3ff;
+      border-radius: 2px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 5px rgba(47, 97, 216, .25);
+      overflow: hidden;
+    }
+
+    .request-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 16px;
+      background: #e3f3ff;
+    }
+
+    .request-title {
+      margin: 0;
+      color: #2f61d8;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
+    .request-title em { font-style: italic; }
+    .request-meta { font-size: 13px; color: #2351bd; }
+
+    .badges { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 5px 10px;
+      background: white;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .badge.late { color: var(--danger); border-color: #fecaca; background: #fef2f2; }
+    .badge.ok { color: #047857; border-color: #a7f3d0; background: #ecfdf5; }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(160px, 1fr));
+      border-top: 1px solid #eef2ff;
+    }
+
+    .step { min-height: 132px; border-right: 1px solid #edf2fb; color: #c9bfc2; }
+    .step:last-child { border-right: 0; }
+    .step-bar {
+      height: 20px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .step.done .step-bar { background: var(--done); }
+    .step.active .step-bar { background: var(--active); }
+    .step.todo .step-bar { background: var(--todo); }
+
+    .step-body { padding: 12px; position: relative; }
+    .step h3 { margin: 0 0 10px; font-size: 15px; color: inherit; }
+    .step.done h3, .step.active h3 { color: var(--ink); }
+    .step p { margin: 7px 0; line-height: 1.35; }
+    .step .info { position: absolute; top: 10px; right: 12px; font-weight: 900; }
+    .check { margin-top: 14px; color: #203040; font-size: 21px; }
+
+    .action-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .empty {
+      background: white;
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .detail-layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 420px) 1fr;
+      gap: 16px;
+    }
+
+    .panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 4px 14px rgba(23, 50, 77, .07);
+    }
+    .panel h2 { margin: 0 0 12px; font-size: 18px; }
+    .kv { display: grid; grid-template-columns: 150px 1fr; gap: 8px; margin: 8px 0; }
+    .kv strong { color: var(--muted); }
+
+    .form-grid { display: grid; gap: 10px; }
+    label { font-weight: 800; color: #243b53; }
+    textarea { min-height: 90px; resize: vertical; }
+
+    .primary-action {
+      border: 0;
+      border-radius: 12px;
+      background: var(--active);
+      color: white;
+      padding: 11px 14px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .secondary-action {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: white;
+      color: var(--ink);
+      padding: 10px 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .toolbar { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .steps-grid { grid-template-columns: 1fr; }
+      .step { border-right: 0; border-bottom: 1px solid #edf2fb; }
+      .detail-layout { grid-template-columns: 1fr; }
+      .request-head { align-items: flex-start; flex-direction: column; }
+      .badges { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="title-block">
+      <div class="plane" aria-hidden="true">✈</div>
+      <div>
+        <p class="kicker">DGPN.PP.BSPP</p>
+        <h1>Demande de Permissions à l'étranger</h1>
+        <p class="subtitle">Traitement des permissions à l'étranger pour le GIS1</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="pill-btn" id="exportBtn">⬇ Exporter</button>
+      <button class="pill-btn primary" id="newBtn">＋ Nouvelle demande</button>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Navigation principale">
+    <button class="tab" data-view="feed">Fil d'infos 🔔</button>
+    <button class="tab" data-view="files">Dossiers 📁</button>
+    <button class="tab active" data-view="workflow">Workflow ✣</button>
+    <button class="tab" data-view="settings">Paramétrages ⚙</button>
+  </nav>
+
+  <section class="toolbar" aria-label="Filtres workflow">
+    <input id="search" class="field" type="search" placeholder="Rechercher un n°, agent, étape, responsable…" />
+    <select id="statusFilter" class="field">
+      <option value="">Tous les statuts</option>
+      <option value="En cours">En cours</option>
+      <option value="Validée">Validée</option>
+      <option value="Rejetée">Rejetée</option>
+      <option value="Brouillon">Brouillon</option>
+    </select>
+    <select id="stepFilter" class="field">
+      <option value="">Toutes les étapes</option>
+    </select>
+    <span id="selectionLabel">0 demande(s) sélectionnée(s)</span>
+  </section>
+
+  <main class="content">
+    <p class="hint" id="gristHint">
+      Widget prêt pour Grist : mappez les colonnes de votre table vers les champs attendus, ou utilisez ce fichier comme HTML autonome dans le widget HTML.
+    </p>
+    <section class="stats" id="stats"></section>
+    <section id="list"></section>
+    <section id="detail" hidden></section>
+  </main>
+
+  <script>
+    const WORKFLOW_STEPS = [
+      'Dépôt demande de permissions',
+      'Conformité',
+      'Validation chef de corps',
+      'Transmission BSPS'
+    ];
+
+    const FIELD_ALIASES = {
+      numero: ['numero', 'n', 'n_dossier', 'dossier', 'reference', 'numéro', 'N°'],
+      agent: ['agent', 'demandeur', 'initie_par', 'initié_par', 'nom'],
+      dateInitiation: ['dateInitiation', 'date_initiation', 'initie_le', 'initié_le', 'date'],
+      statut: ['statut', 'status', 'etat', 'état'],
+      etape: ['etape', 'étape', 'step', 'etape_en_cours'],
+      responsables: ['responsables', 'responsable', 'assigned_to', 'valideurs'],
+      transmisLe: ['transmisLe', 'transmis_le', 'date_transmission'],
+      destination: ['destination', 'pays', 'lieu'],
+      dateDepart: ['dateDepart', 'date_depart', 'départ'],
+      dateRetour: ['dateRetour', 'date_retour', 'retour'],
+      commentaire: ['commentaire', 'commentaires', 'observations', 'notes']
+    };
+
+    const sampleRequests = [
+      {
+        id: 1,
+        numero: '2226985-32',
+        agent: 'Vincent GESLOT',
+        dateInitiation: '2026-07-21',
+        statut: 'En cours',
+        etape: 'Validation chef de corps',
+        responsables: 'Gauthier DELAFORGE, Yannick Pagnot, Alexis BEAUMONT, Geoffroy DE BROGLIE',
+        transmisLe: '2026-07-22T09:18:00',
+        destination: 'Espagne',
+        dateDepart: '2026-08-02',
+        dateRetour: '2026-08-12',
+        commentaire: 'Contrôle de conformité terminé, en attente accusé réception.'
+      },
+      {
+        id: 2,
+        numero: '2226985-31',
+        agent: 'Vincent GESLOT',
+        dateInitiation: '2026-07-21',
+        statut: 'En cours',
+        etape: 'Validation chef de corps',
+        responsables: 'Gauthier DELAFORGE, Yannick Pagnot, Alexis BEAUMONT, Geoffroy DE BROGLIE',
+        transmisLe: '2026-07-22T09:15:00',
+        destination: 'Italie',
+        dateDepart: '2026-08-18',
+        dateRetour: '2026-08-24',
+        commentaire: ''
+      },
+      {
+        id: 3,
+        numero: '2226985-30',
+        agent: 'Anaïs MARSAL',
+        dateInitiation: '2026-07-20',
+        statut: 'En cours',
+        etape: 'Validation chef de corps',
+        responsables: 'Gauthier DELAFORGE, Yannick Pagnot, Alexis BEAUMONT, Geoffroy DE BROGLIE',
+        transmisLe: '2026-07-22T09:13:00',
+        destination: 'Portugal',
+        dateDepart: '2026-08-07',
+        dateRetour: '2026-08-16',
+        commentaire: ''
+      }
+    ];
+
+    let records = sampleRequests;
+    let selectedId = null;
+    let currentView = 'workflow';
+    let gristReady = false;
+
+    const $ = (id) => document.getElementById(id);
+
+    function firstValue(record, aliases, fallback = '') {
+      for (const key of aliases) {
+        if (record[key] !== undefined && record[key] !== null && record[key] !== '') return record[key];
+      }
+      return fallback;
+    }
+
+    function normalizeRecord(record, index) {
+      const normalized = { id: record.id || record.ID || index + 1 };
+      for (const [target, aliases] of Object.entries(FIELD_ALIASES)) {
+        normalized[target] = firstValue(record, aliases);
+      }
+      normalized.numero = normalized.numero || `D-${String(index + 1).padStart(4, '0')}`;
+      normalized.agent = normalized.agent || 'Demandeur non renseigné';
+      normalized.statut = normalized.statut || 'En cours';
+      normalized.etape = normalized.etape || WORKFLOW_STEPS[0];
+      return normalized;
+    }
+
+    function formatDate(value, withTime = false) {
+      if (!value) return '—';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return String(value);
+      return new Intl.DateTimeFormat('fr-FR', {
+        day: '2-digit', month: '2-digit', year: 'numeric',
+        ...(withTime ? { hour: '2-digit', minute: '2-digit' } : {})
+      }).format(date);
+    }
+
+    function stepIndex(request) {
+      const index = WORKFLOW_STEPS.findIndex(step => step.toLowerCase() === String(request.etape).toLowerCase());
+      return index >= 0 ? index : 0;
+    }
+
+    function filteredRecords() {
+      const term = $('search').value.trim().toLowerCase();
+      const status = $('statusFilter').value;
+      const step = $('stepFilter').value;
+      return records.filter(request => {
+        const haystack = Object.values(request).join(' ').toLowerCase();
+        return (!term || haystack.includes(term)) && (!status || request.statut === status) && (!step || request.etape === step);
+      });
+    }
+
+    function renderStats(items) {
+      const inProgress = items.filter(item => item.statut === 'En cours').length;
+      const completed = items.filter(item => item.statut === 'Validée').length;
+      const waiting = items.filter(item => item.etape === 'Validation chef de corps').length;
+      $('stats').innerHTML = [
+        ['Demandes', items.length],
+        ['En cours', inProgress],
+        ['Validées', completed],
+        ['À valider CDC', waiting]
+      ].map(([label, value]) => `<article class="stat-card"><div class="stat-value">${value}</div><div class="stat-label">${label}</div></article>`).join('');
+    }
+
+    function renderSteps(request) {
+      const current = stepIndex(request);
+      return `<div class="steps-grid">${WORKFLOW_STEPS.map((step, index) => {
+        const state = index < current ? 'done' : index === current ? 'active' : 'todo';
+        const body = index === current
+          ? `<p>Transmise le : ${formatDate(request.transmisLe, true)}</p><p>Responsable(s) : ${request.responsables || 'À renseigner'}</p><div class="action-row"><button class="pill-btn warning" data-ack="${request.id}">Accuser réception 🧾</button></div>`
+          : `<p>Responsable(s) : ${index === 0 ? request.agent : index === 1 ? 'Référent conformité' : request.responsables || 'À renseigner'}</p>${index < current ? '<div class="check">●✓</div>' : ''}`;
+        return `<article class="step ${state}"><div class="step-bar">${index + 1} - ${step}</div><div class="step-body"><span class="info">ℹ</span><h3>${step}</h3>${body}</div></article>`;
+      }).join('')}</div>`;
+    }
+
+    function renderList() {
+      const items = filteredRecords();
+      renderStats(items);
+      $('detail').hidden = true;
+      $('list').hidden = false;
+      $('selectionLabel').textContent = `${selectedId ? 1 : 0} demande(s) sélectionnée(s)`;
+      if (!items.length) {
+        $('list').innerHTML = '<div class="empty">Aucune demande ne correspond aux filtres.</div>';
+        return;
+      }
+      $('list').innerHTML = items.map(request => `
+        <article class="request-card" data-id="${request.id}">
+          <header class="request-head">
+            <div>
+              <h2 class="request-title">N° ${request.numero} - Initié le : ${formatDate(request.dateInitiation)} par <em>${request.agent}</em></h2>
+              <div class="request-meta">Étape en cours : <em>${request.etape}</em></div>
+            </div>
+            <div class="badges"><span class="badge ok">${request.statut}</span><span class="badge">${request.destination || 'Destination —'}</span><button class="secondary-action" data-open="${request.id}">Détails</button></div>
+          </header>
+          ${renderSteps(request)}
+        </article>`).join('');
+    }
+
+    function renderDetail(request) {
+      selectedId = request.id;
+      $('selectionLabel').textContent = '1 demande(s) sélectionnée(s)';
+      $('list').hidden = true;
+      $('detail').hidden = false;
+      $('detail').innerHTML = `
+        <div class="detail-layout">
+          <aside class="panel">
+            <h2>Dossier ${request.numero}</h2>
+            <div class="kv"><strong>Demandeur</strong><span>${request.agent}</span></div>
+            <div class="kv"><strong>Destination</strong><span>${request.destination || '—'}</span></div>
+            <div class="kv"><strong>Départ</strong><span>${formatDate(request.dateDepart)}</span></div>
+            <div class="kv"><strong>Retour</strong><span>${formatDate(request.dateRetour)}</span></div>
+            <div class="kv"><strong>Statut</strong><span>${request.statut}</span></div>
+            <div class="kv"><strong>Étape</strong><span>${request.etape}</span></div>
+            <button class="secondary-action" id="backBtn">← Retour au workflow</button>
+          </aside>
+          <section class="panel">
+            <h2>Avancement</h2>
+            ${renderSteps(request)}
+            <hr />
+            <form class="form-grid" id="updateForm">
+              <label for="nextStep">Étape</label>
+              <select class="field" id="nextStep">${WORKFLOW_STEPS.map(step => `<option ${step === request.etape ? 'selected' : ''}>${step}</option>`).join('')}</select>
+              <label for="nextStatus">Statut</label>
+              <select class="field" id="nextStatus"><option>En cours</option><option>Validée</option><option>Rejetée</option><option>Brouillon</option></select>
+              <label for="comment">Commentaire</label>
+              <textarea class="field" id="comment">${request.commentaire || ''}</textarea>
+              <button class="primary-action" type="submit">Enregistrer dans Grist si autorisé</button>
+            </form>
+          </section>
+        </div>`;
+      $('nextStatus').value = request.statut;
+    }
+
+    async function updateCurrentRequest() {
+      const request = records.find(item => item.id === selectedId);
+      if (!request) return;
+      request.etape = $('nextStep').value;
+      request.statut = $('nextStatus').value;
+      request.commentaire = $('comment').value;
+      if (window.grist && gristReady && selectedId) {
+        try {
+          await window.grist.docApi.applyUserActions([['UpdateRecord', null, selectedId, {
+            etape: request.etape,
+            statut: request.statut,
+            commentaire: request.commentaire
+          }]]);
+          alert('Mise à jour envoyée à Grist. Vérifiez le mapping des colonnes si la table ne change pas.');
+        } catch (error) {
+          alert(`Mode lecture ou colonnes non mappées : ${error.message}`);
+        }
+      } else {
+        alert('Modification appliquée localement dans le widget de démonstration.');
+      }
+      renderList();
+    }
+
+    function populateStepFilter() {
+      $('stepFilter').innerHTML = '<option value="">Toutes les étapes</option>' + WORKFLOW_STEPS.map(step => `<option value="${step}">${step}</option>`).join('');
+    }
+
+    function bindEvents() {
+      ['search', 'statusFilter', 'stepFilter'].forEach(id => $(id).addEventListener('input', renderList));
+      $('list').addEventListener('click', event => {
+        const openButton = event.target.closest('[data-open]');
+        const ackButton = event.target.closest('[data-ack]');
+        if (openButton || ackButton) {
+          const id = Number((openButton || ackButton).dataset.open || (openButton || ackButton).dataset.ack);
+          const request = records.find(item => Number(item.id) === id);
+          if (request) renderDetail(request);
+        }
+      });
+      $('detail').addEventListener('click', event => {
+        if (event.target.id === 'backBtn') renderList();
+      });
+      $('detail').addEventListener('submit', event => {
+        event.preventDefault();
+        updateCurrentRequest();
+      });
+      document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(item => item.classList.remove('active'));
+        tab.classList.add('active');
+        currentView = tab.dataset.view;
+        if (currentView !== 'workflow') {
+          $('list').hidden = true;
+          $('detail').hidden = true;
+          $('stats').innerHTML = '';
+          $('gristHint').textContent = 'Onglet maquette : le workflow opérationnel est disponible dans l’onglet Workflow.';
+        } else {
+          $('gristHint').textContent = gristReady ? 'Connecté à Grist : les données proviennent de la table liée au widget.' : 'Mode autonome : connectez ce HTML à une table Grist pour charger vos demandes.';
+          renderList();
+        }
+      }));
+      $('newBtn').addEventListener('click', () => alert('Créez une nouvelle ligne dans la table Grist, puis revenez sur le widget pour la suivre.'));
+      $('exportBtn').addEventListener('click', () => {
+        const csv = ['numero;agent;dateInitiation;statut;etape;responsables;destination;dateDepart;dateRetour;commentaire']
+          .concat(filteredRecords().map(r => [r.numero, r.agent, r.dateInitiation, r.statut, r.etape, r.responsables, r.destination, r.dateDepart, r.dateRetour, r.commentaire].map(v => `"${String(v || '').replaceAll('"', '""')}"`).join(';')))
+          .join('\n');
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+        link.download = 'workflow-permissions.csv';
+        link.click();
+        URL.revokeObjectURL(link.href);
+      });
+    }
+
+    function setupGrist() {
+      if (!window.grist) return;
+      gristReady = true;
+      window.grist.ready({
+        requiredAccess: 'full',
+        columns: Object.keys(FIELD_ALIASES).map(key => ({ name: key, title: key, type: 'Any', optional: key !== 'numero' && key !== 'agent' }))
+      });
+      window.grist.onRecords((incoming) => {
+        if (Array.isArray(incoming) && incoming.length) {
+          records = incoming.map(normalizeRecord);
+          $('gristHint').textContent = 'Connecté à Grist : les données proviennent de la table liée au widget.';
+          renderList();
+        }
+      });
+      window.grist.onRecord((record) => {
+        if (record) {
+          const normalized = normalizeRecord(record, 0);
+          selectedId = normalized.id;
+          const existing = records.find(item => item.id === normalized.id);
+          if (existing) Object.assign(existing, normalized);
+          else records.unshift(normalized);
+          renderDetail(normalized);
+        }
+      });
+    }
+
+    function loadGristApi() {
+      if (window.grist) {
+        setupGrist();
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://docs.getgrist.com/grist-plugin-api.js';
+      script.onload = setupGrist;
+      script.onerror = () => {
+        $('gristHint').textContent = 'Mode autonome : la bibliothèque Grist externe n’est pas accessible depuis ce poste, mais le widget reste copiable dans le widget HTML.';
+      };
+      document.head.appendChild(script);
+    }
+
+    populateStepFilter();
+    bindEvents();
+    renderList();
+    loadGristApi();
+  </script>
+</body>
+</html>
