@@ -43,3 +43,16 @@ l'onglet **Import/Export** de l'interface administrateur. Le fichier doit
 contenir un tableau d'objets avec les propriétés `question`, `réponse` et
 `compagnie` (voir `docs/import.json`). Les entrées importées sont ajoutées
 aux FAQ existantes et une sauvegarde automatique est créée.
+
+## Widget Grist — workflow permissions à l'étranger
+
+Un prototype de widget HTML autonome est disponible dans `public/grist-workflow-permissions.html`.
+
+### Utilisation dans Grist
+
+1. Créer une table Grist contenant au minimum les colonnes métier : `numero`, `agent`, `dateInitiation`, `statut`, `etape`, `responsables`, `transmisLe`, `destination`, `dateDepart`, `dateRetour`, `commentaire`.
+2. Ajouter un widget personnalisé de type URL ou HTML.
+3. Si l'accès GitHub Pages est bloqué, copier-coller le contenu complet de `public/grist-workflow-permissions.html` dans le widget HTML.
+4. Autoriser l'accès complet si l'écriture dans la table est souhaitée, puis mapper les colonnes proposées par le widget.
+
+Le fichier fonctionne aussi sans connexion à Grist avec quelques demandes d'exemple, ce qui permet de valider l'affichage auprès des utilisateurs avant de brancher la base réelle.
